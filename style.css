@@ -1,0 +1,2187 @@
+
+/* ==========================================================
+   MI HORARIO — HOJA DE ESTILOS PRINCIPAL
+   Identidad visual:
+   Negro carbón + morado + rojo + blanco cálido.
+   Compatible con pantallas pequeñas y grandes.
+========================================================== */
+
+/* ----------------------------------------------------------
+   1. VARIABLES GLOBALES
+---------------------------------------------------------- */
+
+:root {
+    color-scheme: dark;
+
+    --fondo: #0b0b10;
+    --fondo-secundario: #101017;
+    --panel: #14131d;
+    --panel-elevado: #1a1825;
+    --panel-hover: #201c2d;
+
+    --texto: #f8f6fc;
+    --texto-secundario: #b6b0c5;
+    --texto-terciario: #8f89a1;
+
+    --morado: #b66cff;
+    --morado-claro: #d0a4ff;
+    --morado-oscuro: #7541b8;
+    --morado-transparente: rgba(182, 108, 255, 0.12);
+
+    --rojo: #ff4b70;
+    --rojo-suave: #ff91a8;
+    --rojo-transparente: rgba(255, 75, 112, 0.12);
+
+    --verde: #76e0b0;
+    --verde-transparente: rgba(118, 224, 176, 0.11);
+
+    --borde: rgba(182, 108, 255, 0.17);
+    --borde-suave: rgba(255, 255, 255, 0.07);
+    --borde-fuerte: rgba(182, 108, 255, 0.35);
+
+    --sombra-panel: 0 16px 42px rgba(0, 0, 0, 0.20);
+    --sombra-morada: 0 8px 25px rgba(112, 64, 182, 0.12);
+
+    --radio-pequeno: 10px;
+    --radio-medio: 15px;
+    --radio-grande: 22px;
+    --radio-enorme: 28px;
+
+    --ancho-maximo: 880px;
+
+    --transicion: 180ms ease;
+}
+
+
+/* ----------------------------------------------------------
+   2. REINICIO Y BASE DEL DOCUMENTO
+---------------------------------------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+/*
+   Sin esto, cualquier regla con "display" (por ejemplo los
+   botones en línea) ignora el atributo hidden de HTML.
+*/
+[hidden] {
+    display: none !important;
+}
+
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 18px;
+}
+
+body {
+    min-width: 280px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+
+    /* Respeta el notch y las barras del sistema al instalarla como app. */
+    padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+
+    color: var(--texto);
+    background:
+        radial-gradient(
+            ellipse at 8% 0%,
+            rgba(112, 64, 182, 0.15),
+            transparent 36%
+        ),
+        radial-gradient(
+            ellipse at 100% 13%,
+            rgba(255, 75, 112, 0.07),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #0b0b10 0%,
+            #0d0c13 50%,
+            #0a0a0e 100%
+        );
+
+    font-family:
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    color: inherit;
+}
+
+button,
+input,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--morado-claro);
+    outline-offset: 3px;
+}
+
+::selection {
+    color: #fff;
+    background: rgba(182, 108, 255, 0.43);
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/* ----------------------------------------------------------
+   3. CONTENEDORES PRINCIPALES
+---------------------------------------------------------- */
+
+.encabezado,
+.contenido-principal {
+    width: min(calc(100% - 36px), var(--ancho-maximo));
+    margin-inline: auto;
+}
+
+.encabezado {
+    padding-top: 34px;
+    animation: aparecer-desde-abajo 650ms ease both;
+}
+
+.contenido-principal {
+    padding-bottom: 35px;
+}
+
+.tarjeta {
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-grande);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 23, 36, 0.97),
+            rgba(16, 15, 23, 0.98)
+        );
+
+    box-shadow: var(--sombra-panel);
+}
+
+.resumen-diario,
+.tarjeta-proxima,
+.seccion-semana,
+.seccion-materias {
+    margin-bottom: 24px;
+}
+
+
+/* ----------------------------------------------------------
+   4. ENCABEZADO Y TÍTULO DE LA APLICACIÓN
+---------------------------------------------------------- */
+
+.encabezado-superior {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    overflow: hidden;
+
+    padding: 30px 27px;
+
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-enorme);
+
+    background:
+        radial-gradient(
+            circle at 12% 0%,
+            rgba(112, 64, 182, 0.16),
+            transparent 54%
+        ),
+        linear-gradient(
+            130deg,
+            rgba(25, 23, 37, 0.98),
+            rgba(13, 12, 19, 0.98)
+        );
+
+    box-shadow: var(--sombra-panel);
+}
+
+.encabezado-superior::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 8%;
+    width: 84%;
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--morado),
+        var(--rojo),
+        transparent
+    );
+
+    opacity: 0.95;
+}
+
+.encabezado-superior::after {
+    content: "";
+    position: absolute;
+    right: -90px;
+    bottom: -140px;
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+    background: rgba(112, 64, 182, 0.075);
+    filter: blur(4px);
+    pointer-events: none;
+}
+
+.marca {
+    position: relative;
+    z-index: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.etiqueta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 13px;
+
+    color: var(--morado-claro);
+    font-size: 0.70rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    line-height: 1.5;
+}
+
+.etiqueta-indicador {
+    display: inline-block;
+    flex: 0 0 25px;
+    width: 25px;
+    height: 3px;
+
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--rojo), var(--morado));
+}
+
+.titulo-principal {
+    margin: 0;
+
+    font-size: clamp(2.65rem, 8.2vw, 4.8rem);
+    font-weight: 850;
+    letter-spacing: -0.075em;
+    line-height: 0.99;
+    overflow-wrap: normal;
+}
+
+.titulo-principal span {
+    display: inline-block;
+
+    color: var(--morado);
+
+    background: linear-gradient(
+        120deg,
+        #f0d9ff 0%,
+        #c38aff 42%,
+        #a65bff 100%
+    );
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitulo-principal {
+    margin: 15px 0 0;
+
+    color: var(--texto-secundario);
+    font-size: 0.98rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+.acento-marca {
+    width: 87px;
+    height: 4px;
+    margin-top: 20px;
+
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--rojo), var(--morado));
+}
+
+
+/* ----------------------------------------------------------
+   5. LOGO UVP Y NOMBRE DE LA CARRERA
+
+   El archivo uvp.png puede tener letras negras.
+   Por eso, su marco NO utiliza un filtro negativo:
+   tiene un fondo claro y conserva el logo original.
+---------------------------------------------------------- */
+
+.identidad-escuela {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex: 0 0 142px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    padding-left: 21px;
+
+    border-left: 1px solid var(--borde);
+
+    text-align: center;
+}
+
+.logo-marco {
+    display: grid;
+    place-items: center;
+
+    width: 104px;
+    height: 104px;
+    padding: 11px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 23px;
+
+    /*
+       El marfil suaviza el contraste con la interfaz oscura
+       y permite que las letras negras del escudo se lean.
+    */
+    background:
+        linear-gradient(
+            145deg,
+            #fffefa 0%,
+            #f6f1e6 100%
+        );
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.28),
+        0 0 0 4px rgba(255, 255, 255, 0.025);
+}
+
+.logo-marco img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    /*
+       Sin filtros de inversión ni cambios de color:
+       se conserva el aspecto original de uvp.png.
+    */
+    filter: none;
+}
+
+.logo-respaldo {
+    display: grid;
+    place-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    color: #17121f;
+    font-size: 1.7rem;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+}
+
+.nombre-carrera {
+    max-width: 145px;
+    margin: 12px 0 0;
+
+    color: #ead7ff;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.03rem;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.carrera-detalle {
+    margin-top: 6px;
+
+    color: var(--texto-terciario);
+
+    font-size: 0.53rem;
+    font-weight: 700;
+    letter-spacing: 0.095em;
+    line-height: 1.5;
+}
+
+.linea-decorativa {
+    width: 84px;
+    height: 3px;
+    margin: 17px 0 0 7px;
+
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--rojo), var(--morado));
+}
+
+.informacion-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 15px;
+
+    padding: 13px 7px 20px;
+}
+
+.fecha-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--texto-secundario);
+    font-size: 0.79rem;
+}
+
+.punto-estado {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+    background: var(--verde);
+    box-shadow: 0 0 10px rgba(118, 224, 176, 0.45);
+}
+
+.estado-dia {
+    color: var(--texto-terciario);
+    font-size: 0.69rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+}
+
+
+/* ----------------------------------------------------------
+   6. TÍTULOS DE SECCIÓN
+---------------------------------------------------------- */
+
+.titulo-seccion,
+.encabezado-seccion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.titulo-con-icono {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.icono-seccion {
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 39px;
+    width: 39px;
+    height: 39px;
+
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+
+    color: var(--morado-claro);
+    background: var(--morado-transparente);
+
+    font-size: 0.72rem;
+    font-weight: 850;
+    letter-spacing: 0.02em;
+}
+
+.icono-proxima {
+    color: var(--rojo-suave);
+    border-color: rgba(255, 75, 112, 0.23);
+    background: var(--rojo-transparente);
+}
+
+.icono-semana {
+    color: #c2a5ff;
+}
+
+.icono-materias {
+    color: var(--verde);
+    border-color: rgba(118, 224, 176, 0.18);
+    background: var(--verde-transparente);
+}
+
+.sobretitulo {
+    margin: 0 0 4px;
+
+    color: var(--texto-terciario);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.125em;
+    line-height: 1.4;
+}
+
+.titulo-seccion h2,
+.encabezado-seccion h2 {
+    margin: 0;
+
+    color: var(--texto);
+    font-size: 1.13rem;
+    font-weight: 750;
+    letter-spacing: -0.035em;
+    line-height: 1.25;
+}
+
+.resumen-diario,
+.tarjeta-proxima {
+    padding: 23px;
+}
+
+.tarjeta-proxima {
+    position: relative;
+    overflow: hidden;
+}
+
+.tarjeta-proxima::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 8%;
+    width: 115px;
+    height: 1px;
+
+    background: linear-gradient(90deg, transparent, var(--rojo), transparent);
+    opacity: 0.8;
+}
+
+.estado-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 9px;
+
+    border: 1px solid var(--borde);
+    border-radius: 99px;
+
+    color: var(--texto-secundario);
+    background: rgba(255, 255, 255, 0.02);
+
+    font-size: 0.59rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    white-space: nowrap;
+}
+
+.estado-mini-punto {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+    background: var(--rojo);
+    box-shadow: 0 0 9px rgba(255, 75, 112, 0.65);
+}
+
+
+/* ----------------------------------------------------------
+   7. MÉTRICAS DEL DÍA
+---------------------------------------------------------- */
+
+.metricas-dia {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+
+    margin-top: 21px;
+}
+
+.metrica {
+    min-width: 0;
+    padding: 15px 13px;
+
+    border: 1px solid var(--borde-suave);
+    border-radius: var(--radio-medio);
+
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.025),
+        rgba(255, 255, 255, 0.008)
+    );
+}
+
+.metrica-valor {
+    display: block;
+
+    color: var(--texto);
+    font-size: clamp(1.15rem, 3vw, 1.65rem);
+    font-weight: 850;
+    letter-spacing: -0.05em;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.metrica-etiqueta {
+    display: block;
+    margin-top: 7px;
+
+    color: var(--texto-secundario);
+    font-size: 0.69rem;
+    line-height: 1.4;
+}
+
+.metrica-acento {
+    display: block;
+    width: 23px;
+    height: 3px;
+    margin-top: 12px;
+
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--morado), transparent);
+}
+
+.metrica:nth-child(2) .metrica-acento {
+    background: linear-gradient(90deg, var(--rojo), transparent);
+}
+
+.metrica:nth-child(3) .metrica-acento {
+    background: linear-gradient(90deg, var(--verde), transparent);
+}
+
+
+/* ----------------------------------------------------------
+   8. BARRA DE PROGRESO
+---------------------------------------------------------- */
+
+.progreso-contenedor {
+    margin-top: 22px;
+}
+
+.progreso-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-bottom: 10px;
+
+    color: var(--texto-secundario);
+    font-size: 0.74rem;
+}
+
+#texto-porcentaje {
+    color: var(--morado-claro);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.progreso-fondo {
+    width: 100%;
+    height: 8px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.035);
+    border-radius: 99px;
+
+    background: #282331;
+}
+
+.progreso-relleno {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: linear-gradient(
+        90deg,
+        var(--morado-oscuro),
+        var(--morado),
+        #e2a8ff
+    );
+
+    box-shadow: 0 0 13px rgba(182, 108, 255, 0.25);
+
+    transition: width 450ms ease;
+}
+
+.texto-progreso {
+    margin: 10px 0 0;
+
+    color: var(--texto-terciario);
+    font-size: 0.73rem;
+    line-height: 1.6;
+}
+
+
+/* ----------------------------------------------------------
+   9. TARJETA DE LA PRÓXIMA CLASE
+---------------------------------------------------------- */
+
+#mensaje-proxima {
+    min-width: 0;
+    margin-top: 19px;
+}
+
+.proxima-contenido {
+    position: relative;
+    overflow: hidden;
+
+    padding: 20px;
+
+    border: 1px solid rgba(182, 108, 255, 0.21);
+    border-radius: var(--radio-medio);
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(182, 108, 255, 0.11),
+            transparent 50%
+        ),
+        linear-gradient(
+            120deg,
+            rgba(112, 64, 182, 0.13),
+            rgba(255, 75, 112, 0.035)
+        );
+}
+
+.proxima-contenido::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+
+    background: linear-gradient(180deg, var(--morado), var(--rojo));
+}
+
+.proxima-estado {
+    margin-bottom: 9px;
+
+    color: var(--morado-claro);
+    font-size: 0.62rem;
+    font-weight: 850;
+    letter-spacing: 0.12em;
+}
+
+.proxima-estado.en-curso {
+    color: var(--rojo-suave);
+}
+
+.proxima-materia {
+    margin: 0;
+
+    color: var(--texto);
+    font-size: clamp(1.05rem, 3.5vw, 1.38rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.proxima-detalle {
+    margin: 10px 0 0;
+
+    color: var(--texto-secundario);
+    font-size: 0.79rem;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.proxima-pie {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 15px;
+    padding-top: 13px;
+
+    border-top: 1px solid var(--borde-suave);
+}
+
+.proxima-tiempo {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #e8d3ff;
+    font-size: 0.79rem;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+}
+
+.proxima-tiempo::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+    background: var(--morado);
+    box-shadow: 0 0 9px rgba(182, 108, 255, 0.4);
+}
+
+.proxima-nota {
+    color: var(--texto-terciario);
+    font-size: 0.7rem;
+}
+
+
+/* ----------------------------------------------------------
+   10. SECCIÓN DE LA SEMANA
+---------------------------------------------------------- */
+
+.encabezado-seccion {
+    margin-bottom: 17px;
+}
+
+.boton-hoy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 38px;
+    padding: 8px 13px;
+
+    border: 1px solid rgba(182, 108, 255, 0.31);
+    border-radius: 12px;
+
+    color: #e4caff;
+    background: rgba(182, 108, 255, 0.09);
+
+    font-size: 0.73rem;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        background var(--transicion),
+        border-color var(--transicion),
+        transform var(--transicion);
+}
+
+/* Los efectos hover solo se aplican con mouse: en pantallas táctiles
+   se quedaban "pegados" después de tocar. */
+@media (hover: hover) {
+    .boton-hoy:hover {
+        border-color: var(--morado);
+        background: rgba(182, 108, 255, 0.18);
+        transform: translateY(-1px);
+    }
+}
+
+.boton-hoy:active {
+    transform: translateY(0);
+}
+
+.panel-semana {
+    padding: 20px;
+}
+
+.selector-dias {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.boton-dia {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    min-width: 0;
+    min-height: 69px;
+    padding: 10px 3px;
+
+    border: 1px solid var(--borde-suave);
+    border-radius: 13px;
+
+    color: var(--texto-secundario);
+    background: rgba(255, 255, 255, 0.018);
+
+    cursor: pointer;
+
+    transition:
+        background var(--transicion),
+        border-color var(--transicion),
+        color var(--transicion),
+        transform var(--transicion);
+}
+
+@media (hover: hover) {
+    .boton-dia:hover {
+        border-color: var(--borde-fuerte);
+        background: rgba(182, 108, 255, 0.075);
+        transform: translateY(-2px);
+    }
+}
+
+.boton-dia.seleccionado {
+    border-color: var(--morado);
+    color: #fff;
+
+    background: linear-gradient(
+        150deg,
+        rgba(112, 64, 182, 0.35),
+        rgba(182, 108, 255, 0.12)
+    );
+
+    box-shadow: var(--sombra-morada);
+}
+
+.boton-dia.hoy:not(.seleccionado) {
+    border-color: rgba(255, 75, 112, 0.56);
+}
+
+.dia-corto {
+    color: inherit;
+    font-size: 0.73rem;
+    font-weight: 800;
+}
+
+.dia-indicador {
+    display: block;
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+    background: var(--texto-terciario);
+}
+
+.boton-dia.seleccionado .dia-indicador {
+    background: var(--morado-claro);
+    box-shadow: 0 0 8px rgba(182, 108, 255, 0.6);
+}
+
+.boton-dia.hoy:not(.seleccionado) .dia-indicador {
+    background: var(--rojo);
+}
+
+.separador-seccion {
+    width: 100%;
+    height: 1px;
+    margin: 21px 0;
+
+    background: linear-gradient(
+        90deg,
+        var(--borde),
+        rgba(255, 255, 255, 0.04),
+        transparent
+    );
+}
+
+.informacion-dia {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-bottom: 16px;
+}
+
+.informacion-dia h3 {
+    margin: 0;
+
+    color: var(--texto);
+    font-size: 1.04rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.contador-clases {
+    color: var(--texto-terciario);
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+
+/* ----------------------------------------------------------
+   11. LISTA DE CLASES Y HORARIOS
+---------------------------------------------------------- */
+
+.horario-dia {
+    min-width: 0;
+}
+
+.lista-clases {
+    display: grid;
+    gap: 9px;
+}
+
+.clase-tarjeta {
+    display: grid;
+    grid-template-columns: 106px minmax(0, 1fr);
+    gap: 15px;
+
+    padding: 15px;
+
+    border: 1px solid var(--borde-suave);
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.025),
+        rgba(255, 255, 255, 0.008)
+    );
+
+    transition:
+        border-color var(--transicion),
+        background var(--transicion),
+        transform var(--transicion);
+
+    animation: tarjeta-entrar 300ms ease both;
+}
+
+@media (hover: hover) {
+    .clase-tarjeta:hover {
+        border-color: rgba(182, 108, 255, 0.28);
+        background: rgba(255, 255, 255, 0.035);
+        transform: translateY(-1px);
+    }
+}
+
+.clase-tarjeta.en-curso {
+    border-color: rgba(255, 75, 112, 0.60);
+
+    background: linear-gradient(
+        110deg,
+        rgba(255, 75, 112, 0.09),
+        rgba(20, 19, 29, 0.96) 70%
+    );
+
+    box-shadow: inset 3px 0 0 rgba(255, 75, 112, 0.8);
+}
+
+.clase-tarjeta.finalizada {
+    border-color: rgba(118, 224, 176, 0.12);
+}
+
+.clase-eje-hora {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+
+    padding: 2px 0;
+}
+
+.clase-hora-inicio {
+    color: #dfc4ff;
+    font-size: 0.84rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+}
+
+.clase-hora-separador {
+    padding-left: 1px;
+
+    color: var(--texto-terciario);
+    font-size: 0.62rem;
+}
+
+.clase-hora-fin {
+    color: var(--texto-secundario);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+}
+
+.clase-contenido {
+    min-width: 0;
+}
+
+.clase-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.clase-titulo {
+    min-width: 0;
+    margin: 0;
+
+    color: var(--texto);
+    font-size: 0.89rem;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.etiqueta-estado {
+    display: inline-flex;
+    align-items: center;
+
+    flex: 0 0 auto;
+    padding: 4px 7px;
+
+    border: 1px solid var(--borde);
+    border-radius: 7px;
+
+    color: var(--morado-claro);
+    background: var(--morado-transparente);
+
+    font-size: 0.55rem;
+    font-weight: 850;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+}
+
+.etiqueta-estado.en-curso {
+    border-color: rgba(255, 75, 112, 0.25);
+    color: var(--rojo-suave);
+    background: var(--rojo-transparente);
+}
+
+.etiqueta-estado.finalizada {
+    border-color: rgba(118, 224, 176, 0.19);
+    color: var(--verde);
+    background: var(--verde-transparente);
+}
+
+.detalles-clase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 13px;
+
+    margin-top: 9px;
+}
+
+.detalle-item {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 6px;
+
+    min-width: 0;
+
+    color: var(--texto-secundario);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.detalle-item::before {
+    content: "";
+    flex: 0 0 4px;
+    width: 4px;
+    height: 4px;
+
+    margin-top: 6px;
+
+    border-radius: 50%;
+    background: var(--morado);
+}
+
+.separador-descanso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 24px;
+
+    color: var(--texto-terciario);
+    font-size: 0.66rem;
+    font-weight: 650;
+    letter-spacing: 0.02em;
+}
+
+.separador-descanso-simbolo {
+    color: var(--morado);
+    font-size: 0.67rem;
+}
+
+.linea-descanso {
+    width: 20px;
+    height: 1px;
+
+    background: var(--borde);
+}
+
+.vacio {
+    padding: 28px 18px;
+
+    border: 1px dashed rgba(182, 108, 255, 0.2);
+    border-radius: var(--radio-medio);
+
+    color: var(--texto-secundario);
+    background: rgba(255, 255, 255, 0.012);
+
+    text-align: center;
+}
+
+.vacio-simbolo {
+    display: grid;
+    place-items: center;
+
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 12px;
+
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+
+    color: var(--morado-claro);
+    background: var(--morado-transparente);
+
+    font-size: 1.05rem;
+}
+
+.vacio h4 {
+    margin: 0 0 6px;
+
+    color: var(--texto);
+    font-size: 0.92rem;
+}
+
+.vacio p {
+    max-width: 340px;
+    margin: 0 auto;
+
+    color: var(--texto-terciario);
+    font-size: 0.77rem;
+    line-height: 1.7;
+}
+
+
+/* ----------------------------------------------------------
+   12. BUSCADOR DE MATERIAS
+---------------------------------------------------------- */
+
+.buscador-contenedor {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    min-height: 47px;
+    margin: 18px 0 15px;
+    padding: 0 14px;
+
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+
+    background: rgba(20, 19, 29, 0.88);
+
+    transition:
+        border-color var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.buscador-contenedor:focus-within {
+    border-color: rgba(182, 108, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(182, 108, 255, 0.075);
+}
+
+.buscador-icono {
+    flex: 0 0 auto;
+
+    color: var(--morado-claro);
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.buscador-materias {
+    width: 100%;
+    min-width: 0;
+    min-height: 45px;
+
+    padding: 0;
+
+    border: 0;
+    outline: none;
+
+    color: var(--texto);
+    background: transparent;
+
+    font-size: 0.81rem;
+}
+
+.buscador-materias::placeholder {
+    color: var(--texto-terciario);
+    opacity: 1;
+}
+
+.buscador-materias:focus-visible {
+    outline: none;
+}
+
+.contador-materias {
+    flex: 0 0 auto;
+
+    color: var(--texto-terciario);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+
+/* ----------------------------------------------------------
+   13. TARJETAS DE MATERIAS
+---------------------------------------------------------- */
+
+.lista-materias {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.materia-card {
+    position: relative;
+    overflow: hidden;
+
+    min-width: 0;
+    padding: 16px;
+
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+
+    background: linear-gradient(
+        145deg,
+        rgba(24, 22, 34, 0.97),
+        rgba(16, 15, 23, 0.97)
+    );
+
+    transition:
+        border-color var(--transicion),
+        transform var(--transicion),
+        background var(--transicion);
+
+    animation: tarjeta-entrar 350ms ease both;
+}
+
+@media (hover: hover) {
+    .materia-card:hover {
+        border-color: rgba(182, 108, 255, 0.36);
+        background: var(--panel-elevado);
+        transform: translateY(-2px);
+    }
+}
+
+.materia-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 13px;
+    width: 34px;
+    height: 2px;
+
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--morado), transparent);
+}
+
+.materia-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+
+    margin: 3px 0 12px;
+}
+
+.materia-numero {
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid var(--borde);
+    border-radius: 9px;
+
+    color: var(--morado-claro);
+    background: var(--morado-transparente);
+
+    font-size: 0.66rem;
+    font-weight: 850;
+}
+
+.materia-sesiones {
+    flex: 0 0 auto;
+
+    max-width: 115px;
+    padding: 5px 7px;
+
+    border: 1px solid var(--borde-suave);
+    border-radius: 8px;
+
+    color: var(--texto-secundario);
+    background: rgba(255, 255, 255, 0.02);
+
+    font-size: 0.6rem;
+    text-align: center;
+    line-height: 1.35;
+}
+
+.materia-titulo {
+    margin: 0 0 13px;
+
+    color: var(--texto);
+    font-size: 0.88rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.materia-lineas {
+    display: grid;
+    gap: 8px;
+
+    padding-top: 11px;
+    border-top: 1px solid var(--borde-suave);
+}
+
+.materia-dato {
+    margin: 0;
+
+    color: var(--texto-secundario);
+    font-size: 0.7rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+.materia-dato strong {
+    display: block;
+    margin-bottom: 2px;
+
+    color: var(--texto-terciario);
+
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+.materias-sin-resultados {
+    grid-column: 1 / -1;
+}
+
+
+/* ----------------------------------------------------------
+   14. PIE DE PÁGINA
+---------------------------------------------------------- */
+
+.pie-pagina {
+    padding: 12px 12px 0;
+    text-align: center;
+}
+
+.pie-linea {
+    width: 100%;
+    height: 1px;
+    margin: 0 auto 23px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--borde),
+        rgba(255, 75, 112, 0.22),
+        var(--borde),
+        transparent
+    );
+}
+
+.pie-frase {
+    margin: 0 0 9px;
+
+    color: var(--texto-secundario);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+.pie-identidad {
+    margin: 0 0 12px;
+
+    color: var(--texto);
+    font-size: 0.75rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+}
+
+.pie-identidad span {
+    color: var(--morado-claro);
+}
+
+.pie-creditos {
+    margin: 0;
+
+    color: var(--texto-terciario);
+    font-size: 0.67rem;
+}
+
+.pie-creditos span {
+    margin-inline: 4px;
+    color: var(--morado);
+}
+
+/* Botón de instalación y ayuda para iPhone */
+.instalar {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+
+    margin: 0 0 14px;
+}
+
+.boton-instalar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 42px;
+    padding: 9px 18px;
+
+    border: 1px solid rgba(182, 108, 255, 0.4);
+    border-radius: 13px;
+
+    color: #f1e1ff;
+    background: linear-gradient(
+        135deg,
+        rgba(112, 64, 182, 0.4),
+        rgba(182, 108, 255, 0.14)
+    );
+
+    font-size: 0.8rem;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        border-color var(--transicion),
+        transform var(--transicion);
+}
+
+.boton-instalar:active {
+    transform: scale(0.98);
+}
+
+@media (hover: hover) {
+    .boton-instalar:hover {
+        border-color: var(--morado);
+        transform: translateY(-1px);
+    }
+}
+
+.pista-instalar {
+    max-width: 320px;
+    margin: 0;
+
+    color: var(--texto-secundario);
+    font-size: 0.74rem;
+    line-height: 1.6;
+}
+
+.pista-instalar strong {
+    color: var(--morado-claro);
+    font-weight: 750;
+}
+
+/* Enlace para saltar directo al contenido (teclado y lectores) */
+.saltar-contenido {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10;
+
+    padding: 9px 14px;
+
+    border-radius: 10px;
+
+    color: #fff;
+    background: var(--morado-oscuro);
+
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    transform: translateY(-160%);
+}
+
+.saltar-contenido:focus {
+    transform: translateY(0);
+}
+
+.contenido-principal:focus {
+    outline: none;
+}
+
+.aviso-noscript {
+    margin: 20px;
+    padding: 16px;
+
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-medio);
+
+    color: var(--texto-secundario);
+    text-align: center;
+}
+
+
+/* ----------------------------------------------------------
+   15. CLASE AUXILIAR PARA LECTORES DE PANTALLA
+---------------------------------------------------------- */
+
+.solo-lectores {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+
+    border: 0;
+}
+
+
+/* ----------------------------------------------------------
+   16. ANIMACIONES
+---------------------------------------------------------- */
+
+@keyframes aparecer-desde-abajo {
+    from {
+        opacity: 0;
+        transform: translateY(11px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes tarjeta-entrar {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*
+   Las actualizaciones automáticas (cada minuto) y la búsqueda no
+   repiten la animación de entrada; solo se anima cuando la persona
+   cambia de día o abre la página.
+*/
+.sin-animacion .clase-tarjeta,
+.sin-animacion .materia-card {
+    animation: none;
+}
+
+
+/* ----------------------------------------------------------
+   17. TABLET Y PANTALLAS MEDIANAS
+---------------------------------------------------------- */
+
+@media (max-width: 700px) {
+    .encabezado,
+    .contenido-principal {
+        width: min(calc(100% - 28px), var(--ancho-maximo));
+    }
+
+    .encabezado {
+        padding-top: 23px;
+    }
+
+    .encabezado-superior {
+        gap: 16px;
+        padding: 25px 20px;
+        border-radius: 24px;
+    }
+
+    .identidad-escuela {
+        flex-basis: 122px;
+        padding-left: 15px;
+    }
+
+    .logo-marco {
+        width: 91px;
+        height: 91px;
+        padding: 9px;
+        border-radius: 20px;
+    }
+
+    .nombre-carrera {
+        font-size: 0.93rem;
+    }
+
+    .carrera-detalle {
+        font-size: 0.55rem;
+    }
+
+    .panel-semana {
+        padding: 16px;
+    }
+
+    .selector-dias {
+        gap: 5px;
+    }
+
+    .boton-dia {
+        min-height: 62px;
+    }
+
+    .dia-corto {
+        font-size: 0.68rem;
+    }
+
+    .clase-tarjeta {
+        grid-template-columns: 93px minmax(0, 1fr);
+        gap: 12px;
+    }
+}
+
+
+/* ----------------------------------------------------------
+   18. TELÉFONOS
+---------------------------------------------------------- */
+
+@media (max-width: 480px) {
+    .encabezado,
+    .contenido-principal {
+        width: calc(100% - 22px);
+    }
+
+    .encabezado {
+        padding-top: 15px;
+    }
+
+    .encabezado-superior {
+        align-items: center;
+        gap: 10px;
+
+        padding: 22px 13px;
+        border-radius: 20px;
+    }
+
+    .etiqueta {
+        gap: 7px;
+        margin-bottom: 11px;
+
+        font-size: 0.6rem;
+        letter-spacing: 0.105em;
+    }
+
+    .etiqueta-indicador {
+        flex-basis: 16px;
+        width: 16px;
+    }
+
+    .titulo-principal {
+        font-size: clamp(2.13rem, 10vw, 3.1rem);
+        letter-spacing: -0.075em;
+    }
+
+    .subtitulo-principal {
+        margin-top: 10px;
+        font-size: 0.76rem;
+    }
+
+    .acento-marca {
+        width: 57px;
+        height: 3px;
+        margin-top: 15px;
+    }
+
+    .identidad-escuela {
+        flex-basis: 88px;
+        padding-left: 9px;
+    }
+
+    .logo-marco {
+        width: 65px;
+        height: 65px;
+        padding: 7px;
+        border-radius: 16px;
+    }
+
+    .nombre-carrera {
+        max-width: 88px;
+        margin-top: 9px;
+
+        font-size: 0.72rem;
+        line-height: 1.3;
+    }
+
+    .carrera-detalle {
+        max-width: 88px;
+        margin-top: 5px;
+
+        font-size: 0.55rem;
+        letter-spacing: 0.035em;
+        line-height: 1.4;
+    }
+
+    .linea-decorativa {
+        margin-top: 13px;
+    }
+
+    .informacion-cabecera {
+        gap: 6px 10px;
+        padding: 12px 4px 16px;
+    }
+
+    .fecha-cabecera {
+        font-size: 0.69rem;
+    }
+
+    .estado-dia {
+        font-size: 0.58rem;
+    }
+
+    .resumen-diario,
+    .tarjeta-proxima {
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .resumen-diario,
+    .tarjeta-proxima,
+    .seccion-semana,
+    .seccion-materias {
+        margin-bottom: 19px;
+    }
+
+    .icono-seccion {
+        flex-basis: 33px;
+        width: 33px;
+        height: 33px;
+        border-radius: 10px;
+        font-size: 0.65rem;
+    }
+
+    .titulo-con-icono {
+        gap: 9px;
+    }
+
+    .sobretitulo {
+        font-size: 0.6rem;
+        letter-spacing: 0.105em;
+    }
+
+    .titulo-seccion h2,
+    .encabezado-seccion h2 {
+        font-size: 1rem;
+    }
+
+    .estado-mini {
+        gap: 5px;
+        padding: 6px 7px;
+        font-size: 0.58rem;
+    }
+
+    .metricas-dia {
+        gap: 7px;
+        margin-top: 16px;
+    }
+
+    .metrica {
+        padding: 12px 9px;
+        border-radius: 12px;
+    }
+
+    .metrica-valor {
+        font-size: clamp(1rem, 4.5vw, 1.32rem);
+    }
+
+    .metrica-etiqueta {
+        margin-top: 5px;
+        font-size: 0.61rem;
+    }
+
+    .metrica-acento {
+        margin-top: 10px;
+    }
+
+    .progreso-contenedor {
+        margin-top: 18px;
+    }
+
+    .progreso-cabecera {
+        font-size: 0.69rem;
+    }
+
+    .texto-progreso {
+        font-size: 0.68rem;
+    }
+
+    .proxima-contenido {
+        padding: 17px 14px;
+    }
+
+    .proxima-materia {
+        font-size: 1.05rem;
+    }
+
+    .proxima-detalle {
+        font-size: 0.73rem;
+    }
+
+    .encabezado-seccion {
+        align-items: center;
+        gap: 8px;
+    }
+
+    .boton-hoy {
+        min-height: 34px;
+        gap: 5px;
+        padding: 7px 9px;
+        border-radius: 10px;
+        font-size: 0.65rem;
+    }
+
+    .panel-semana {
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    .selector-dias {
+        gap: 4px;
+    }
+
+    .boton-dia {
+        min-height: 56px;
+        gap: 5px;
+        padding: 8px 1px;
+        border-radius: 10px;
+    }
+
+    .dia-corto {
+        font-size: 0.66rem;
+    }
+
+    .dia-indicador {
+        width: 4px;
+        height: 4px;
+    }
+
+    .separador-seccion {
+        margin: 16px 0;
+    }
+
+    .informacion-dia {
+        gap: 7px;
+        margin-bottom: 12px;
+    }
+
+    .informacion-dia h3 {
+        font-size: 0.94rem;
+    }
+
+    .contador-clases {
+        font-size: 0.63rem;
+    }
+
+    .clase-tarjeta {
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 9px;
+
+        padding: 12px 10px;
+        border-radius: 12px;
+    }
+
+    .clase-hora-inicio {
+        font-size: 0.72rem;
+    }
+
+    .clase-hora-separador {
+        font-size: 0.57rem;
+    }
+
+    .clase-hora-fin {
+        font-size: 0.68rem;
+    }
+
+    .clase-titulo {
+        font-size: 0.79rem;
+    }
+
+    .detalles-clase {
+        gap: 5px 9px;
+        margin-top: 7px;
+    }
+
+    .detalle-item {
+        font-size: 0.66rem;
+    }
+
+    .etiqueta-estado {
+        padding: 3px 5px;
+        font-size: 0.58rem;
+    }
+
+    .separador-descanso {
+        min-height: 23px;
+        gap: 6px;
+        font-size: 0.61rem;
+    }
+
+    .lista-materias {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .materia-card {
+        padding: 15px;
+    }
+
+    .materia-titulo {
+        font-size: 0.84rem;
+    }
+
+    .materia-dato {
+        font-size: 0.68rem;
+    }
+
+    .buscador-materias {
+        font-size: 0.75rem;
+    }
+
+    .contador-materias {
+        font-size: 0.65rem;
+    }
+
+    .pie-pagina {
+        padding-inline: 5px;
+    }
+}
+
+
+/* ----------------------------------------------------------
+   19. TELÉFONOS MUY ESTRECHOS
+---------------------------------------------------------- */
+
+@media (max-width: 340px) {
+    .encabezado,
+    .contenido-principal {
+        width: calc(100% - 16px);
+    }
+
+    .encabezado-superior {
+        padding: 19px 9px;
+    }
+
+    .titulo-principal {
+        font-size: 2rem;
+    }
+
+    .etiqueta {
+        font-size: 0.56rem;
+        letter-spacing: 0.07em;
+    }
+
+    /* Texto decorativo: en pantallas tan angostas ya no cabe legible. */
+    .carrera-detalle {
+        display: none;
+    }
+
+    .identidad-escuela {
+        flex-basis: 78px;
+        padding-left: 7px;
+    }
+
+    .logo-marco {
+        width: 59px;
+        height: 59px;
+        padding: 6px;
+    }
+
+    .nombre-carrera {
+        font-size: 0.66rem;
+    }
+
+    .panel-semana {
+        padding: 9px;
+    }
+
+    .boton-dia {
+        min-height: 50px;
+    }
+
+    .dia-corto {
+        font-size: 0.6rem;
+    }
+
+    .clase-tarjeta {
+        grid-template-columns: 68px minmax(0, 1fr);
+        gap: 7px;
+        padding: 10px 8px;
+    }
+
+    .clase-hora-inicio {
+        font-size: 0.66rem;
+    }
+
+    .clase-hora-fin {
+        font-size: 0.62rem;
+    }
+}
+
+
+/* ----------------------------------------------------------
+   20. ACCESIBILIDAD: MOVIMIENTO REDUCIDO
+---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

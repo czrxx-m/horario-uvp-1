@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <!-- Configuración básica del documento -->
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <!-- Apariencia de la página en navegadores móviles -->
+    <meta name="theme-color" content="#0b0b10">
+    <meta name="color-scheme" content="dark">
+    <meta
+        name="description"
+        content="Mi horario personal de clases, materias y actividades de Ingeniería en Agronomía."
+    >
+
+    <!--
+        Es un horario personal: se pide a los buscadores que no lo
+        indexen. Si algún día quieres que aparezca en Google, borra
+        esta línea.
+    -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Comportamiento como app al instalarla -->
+    <meta name="application-name" content="Mi Horario">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Mi Horario">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Mi Horario | Ing. Agronomía</title>
+
+    <!-- Íconos de la pestaña y de la pantalla de inicio -->
+    <link rel="icon" href="icons/favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Hoja de estilos principal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
+
+    <noscript>
+        <p class="aviso-noscript">
+            Esta página necesita JavaScript para mostrar tu horario.
+        </p>
+    </noscript>
+
+    <!-- =====================================================
+         ENCABEZADO PRINCIPAL
+         Incluye el título, la identidad visual y el logo.
+         uvp.png debe estar junto a index.html.
+    ====================================================== -->
+    <header class="encabezado">
+        <div class="encabezado-superior">
+
+            <div class="marca">
+                <div class="etiqueta">
+                    <span class="etiqueta-indicador" aria-hidden="true"></span>
+                    MI ESPACIO ACADÉMICO
+                </div>
+
+                <h1 class="titulo-principal">
+                    Mi <span>Horario.</span>
+                </h1>
+
+                <p class="subtitulo-principal">
+                    Mi semana, a mi ritmo.
+                </p>
+
+                <div class="acento-marca" aria-hidden="true"></div>
+            </div>
+
+            <!-- El contenedor claro permite leer las letras negras -->
+            <aside class="identidad-escuela" aria-label="Identidad escolar">
+                <div class="logo-marco">
+                    <img
+                        id="logo-uvp"
+                        src="uvp.png"
+                        alt="Logotipo de la UVP"
+                        width="1459"
+                        height="1594"
+                        decoding="async"
+                    >
+                </div>
+
+                <p class="nombre-carrera">Ing. Agronomía</p>
+                <span class="carrera-detalle">MI FORMACIÓN · MI FUTURO</span>
+            </aside>
+
+        </div>
+
+        <div class="linea-decorativa" aria-hidden="true"></div>
+
+        <!-- La fecha se actualiza con JavaScript -->
+        <div class="informacion-cabecera">
+            <div class="fecha-cabecera">
+                <span class="punto-estado" aria-hidden="true"></span>
+                <span id="fecha-actual">Cargando fecha...</span>
+            </div>
+
+            <span id="estado-dia" class="estado-dia">
+                Preparando tu semana
+            </span>
+        </div>
+    </header>
+
+    <main id="contenido" class="contenido-principal" tabindex="-1">
+
+        <!-- =================================================
+             RESUMEN DEL DÍA
+             Las métricas y la barra de progreso se generan
+             desde script.js.
+        ================================================== -->
+        <section
+            class="tarjeta resumen-diario"
+            aria-labelledby="titulo-resumen"
+        >
+            <div class="titulo-seccion">
+                <div class="titulo-con-icono">
+                    <span class="icono-seccion icono-resumen" aria-hidden="true">
+                        01
+                    </span>
+
+                    <div>
+                        <p class="sobretitulo">ORGANIZA TU JORNADA</p>
+                        <h2 id="titulo-resumen">Tu día en perspectiva</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div id="metricas-dia" class="metricas-dia">
+                <!-- Las métricas se insertan con JavaScript -->
+            </div>
+
+            <div id="progreso-contenedor" class="progreso-contenedor">
+                <div class="progreso-cabecera">
+                    <span>Progreso de clases</span>
+                    <span id="texto-porcentaje">0%</span>
+                </div>
+
+                <div
+                    id="barra-progreso"
+                    class="progreso-fondo"
+                    role="progressbar"
+                    aria-label="Progreso de las clases del día"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                >
+                    <div id="progreso-relleno" class="progreso-relleno"></div>
+                </div>
+
+                <p id="texto-progreso" class="texto-progreso">
+                    Calculando el progreso de tu jornada...
+                </p>
+            </div>
+        </section>
+
+        <!-- =================================================
+             PRÓXIMA CLASE O ACTIVIDAD
+             El programa detecta automáticamente si una
+             actividad está en curso o cuándo comienza.
+        ================================================== -->
+        <section
+            class="tarjeta tarjeta-proxima"
+            aria-labelledby="titulo-proxima"
+        >
+            <div class="titulo-seccion">
+                <div class="titulo-con-icono">
+                    <span class="icono-seccion icono-proxima" aria-hidden="true">
+                        02
+                    </span>
+
+                    <div>
+                        <p class="sobretitulo">LO QUE VIENE</p>
+                        <h2 id="titulo-proxima">¿Qué clase sigue?</h2>
+                    </div>
+                </div>
+
+                <span class="estado-mini">
+                    <span class="estado-mini-punto" aria-hidden="true"></span>
+                    EN AGENDA
+                </span>
+            </div>
+
+            <div id="mensaje-proxima">
+                <!-- La próxima clase se inserta con JavaScript -->
+            </div>
+        </section>
+
+        <!-- =================================================
+             HORARIO SEMANAL
+             Incluye un selector para los siete días,
+             incluido el domingo como día de descanso.
+        ================================================== -->
+        <section
+            id="semana"
+            class="seccion-semana"
+            aria-labelledby="titulo-semana"
+        >
+            <div class="encabezado-seccion">
+                <div class="titulo-con-icono">
+                    <span class="icono-seccion icono-semana" aria-hidden="true">
+                        03
+                    </span>
+
+                    <div>
+                        <p class="sobretitulo">TU PLANIFICACIÓN</p>
+                        <h2 id="titulo-semana">Mi semana</h2>
+                    </div>
+                </div>
+
+                <button id="boton-hoy" class="boton-hoy" type="button">
+                    <span aria-hidden="true">↗</span>
+                    Volver a hoy
+                </button>
+            </div>
+
+            <div class="panel-semana tarjeta">
+                <nav
+                    id="selector-dias"
+                    class="selector-dias"
+                    aria-label="Seleccionar día de la semana"
+                >
+                    <!-- Los botones de los días se crean con JavaScript -->
+                </nav>
+
+                <div class="separador-seccion"></div>
+
+                <div class="informacion-dia">
+                    <div>
+                        <p class="sobretitulo">HORARIO SELECCIONADO</p>
+                        <h3 id="nombre-dia-seleccionado">Mi horario</h3>
+                    </div>
+
+                    <span id="contador-clases" class="contador-clases">
+                        Cargando bloques...
+                    </span>
+                </div>
+
+                <div id="horario-dia" class="horario-dia">
+                    <!-- Las tarjetas de clases se crean con JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================
+             CATÁLOGO DE MATERIAS Y ACTIVIDADES
+             El buscador permite filtrar por nombre,
+             salón, profesor o día.
+        ================================================== -->
+        <section
+            id="materias"
+            class="seccion-materias"
+            aria-labelledby="titulo-materias"
+        >
+            <div class="encabezado-seccion">
+                <div class="titulo-con-icono">
+                    <span class="icono-seccion icono-materias" aria-hidden="true">
+                        04
+                    </span>
+
+                    <div>
+                        <p class="sobretitulo">TU VIDA ACADÉMICA</p>
+                        <h2 id="titulo-materias">Mis materias</h2>
+                    </div>
+                </div>
+
+                <!-- Único texto que se anuncia solo: dice cuántos resultados hay -->
+                <span
+                    id="contador-materias"
+                    class="contador-materias"
+                    aria-live="polite"
+                >
+                    0 materias
+                </span>
+            </div>
+
+            <div class="buscador-contenedor">
+                <span class="buscador-icono" aria-hidden="true">⌕</span>
+
+                <label class="solo-lectores" for="buscador-materias">
+                    Buscar materias o actividades
+                </label>
+
+                <input
+                    id="buscador-materias"
+                    class="buscador-materias"
+                    type="search"
+                    placeholder="Buscar materia, profesor, salón o día..."
+                    autocomplete="off"
+                >
+            </div>
+
+            <div id="lista-materias" class="lista-materias">
+                <!-- Las tarjetas de materias se insertan con JavaScript -->
+            </div>
+        </section>
+
+        <!-- =================================================
+             PIE DE PÁGINA
+        ================================================== -->
+        <footer class="pie-pagina">
+            <div class="pie-linea" aria-hidden="true"></div>
+
+            <p class="pie-frase">Un día a la vez. Una meta a la vez.</p>
+            <p class="pie-identidad">UVP · <span>Ing. Agronomía</span></p>
+
+            <!-- Solo aparece cuando se puede instalar como app -->
+            <div class="instalar">
+                <button
+                    id="boton-instalar"
+                    class="boton-instalar"
+                    type="button"
+                    hidden
+                >
+                    <span aria-hidden="true">＋</span>
+                    Instalar como app
+                </button>
+
+                <p id="pista-instalar" class="pista-instalar" hidden>
+                    Para instalarla en tu iPhone o iPad: toca
+                    <strong>Compartir</strong> y luego
+                    <strong>Añadir a pantalla de inicio</strong>.
+                </p>
+            </div>
+
+            <p class="pie-creditos">
+                Mi Horario
+                <span aria-hidden="true">·</span>
+                <span id="anio-actual"></span>
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- Datos del horario (aquí se edita cuando cambian tus clases) -->
+    <script src="horario.js"></script>
+
+    <!-- Lógica de horarios, selector de días y cuenta regresiva -->
+    <script src="script.js"></script>
+</body>
+</html>
